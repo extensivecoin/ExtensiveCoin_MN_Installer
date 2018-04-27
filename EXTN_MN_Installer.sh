@@ -5,7 +5,8 @@ CONFIG_FILE='ExtensiveCoin.conf'
 CONFIGFOLDER='/root/.ExtensiveCoinMN'
 COIN_DAEMON='/usr/local/bin/extnd'
 COIN_CLI='/usr/local/bin/extn-cli'
-COIN_REPO='https://github.com/extensivecoin/ExtensiveCoinMN/releases/download/1.0.3/extn-1.0.3-x86_64-linux-gnu.tar.gz' 
+COIN_REPO='https://github.com/extensivecoin/ExtensiveCoinMN/releases/download/1.0.3/extn-1.0.3-x86_64-linux-gnu.tar.gz'
+COIN_ZIP_DIR='extn-1.0.3-x86_64-linux-gnu'
 COIN_NAME='ExtensiveCoin'
 COIN_PORT=24055
 
@@ -25,6 +26,7 @@ function compile_node() {
   compile_error
   COIN_ZIP=$(echo $COIN_REPO | awk -F'/' '{print $NF}')
   tar xvzf $COIN_ZIP >/dev/null 2>&1
+  cd $(COIN_ZIP_DIR)
   compile_error
   cp extn* /usr/local/bin
   compile_error
