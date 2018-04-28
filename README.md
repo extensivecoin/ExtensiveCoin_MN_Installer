@@ -61,3 +61,24 @@ systemctl is-enabled EXTN #To check whetether EXTN service is enabled on boot or
 ```
 
 ***
+
+**./extnd: error while loading shared libraries: libboost_system.so.1.58.0: cannot open shared object file: No such file or directory**: 
+
+Because the standard version of libboost  libboost 1.58. we shall installing libboost 1.58 manually. follow this command:
+```
+sudo apt-get install g++ python-dev autotools-dev libicu-dev libbz2-dev
+wget -O boost_1_58_0.tar.gz https://sourceforge.net/projects/boost/files/boost/1.58.0/boost_1_58_0.tar.gz/download
+tar -xvzf boost_1_58_0.tar.gz
+cd boost_1_58_0/
+
+./bootstrap.sh --prefix=/usr/local
+user_configFile=`find $PWD -name user-config.jam`
+echo "using mpi ;" >> $user_configFile
+n=`cat /proc/cpuinfo | grep "cpu cores" | uniq | awk '{print $NF}'`
+sudo ./b2 --with=all -j $n install 
+sudo sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/local.conf'
+sudo ldconfig
+```
+
+
+
