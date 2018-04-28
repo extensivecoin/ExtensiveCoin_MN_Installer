@@ -26,7 +26,7 @@ function compile_node() {
   compile_error
   COIN_ZIP=$(echo $COIN_REPO | awk -F'/' '{print $NF}')
   tar xvzf $COIN_ZIP >/dev/null 2>&1
-  cd $(COIN_ZIP_DIR)
+  cd $COIN_ZIP_DIR
   compile_error
   cp extn* /usr/local/bin
   compile_error
